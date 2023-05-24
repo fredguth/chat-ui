@@ -17,7 +17,7 @@ export async function updateUser(params: {
 		name,
 		email,
 		picture: avatarUrl,
-		sub: providerUserId,
+		sub: hfUserId,
 	} = z
 		.object({
 			preferred_username: z.string(),
@@ -28,7 +28,7 @@ export async function updateUser(params: {
 		})
 		.parse(userData);
 
-	const existingUser = await collections.users.findOne({ providerUserId });
+	const existingUser = await collections.users.findOne({ hfUserId });
 	let userId = existingUser?._id;
 
 	if (existingUser) {
@@ -49,7 +49,7 @@ export async function updateUser(params: {
 			name,
 			email,
 			avatarUrl,
-			providerUserId,
+			hfUserId,
 			sessionId: locals.sessionId,
 		});
 
